@@ -40,7 +40,8 @@ function Home() {
             <div
                 className="w-full flex flex-col h-screen font-primary p-3"
                 style={{
-                    backgroundImage: 'url(/src/assets/mountain.jpg)',
+                    backgroundImage:
+                        'url(src/assets/background-image/mountain.jpg)',
                     backgroundSize: 'cover',
                 }}
             >

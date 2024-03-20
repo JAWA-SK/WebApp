@@ -3,15 +3,16 @@ import React, { useContext, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { BiLoaderCircle } from 'react-icons/bi'
 import { useNavigate } from 'react-router-dom'
-import lock from '../../assets/lock.json'
-import login_animation from '../../assets/login_animation.json'
-import phone from '../../assets/phone.json'
+import lock from '../../assets/login-images/lock.json'
+import login_animation from '../../assets/login-images/login_animation.json'
+import phone from '../../assets/login-images/phone.json'
 import { UserContext, UserDetailState } from '../../context/UserContext'
 import { auth } from '../../firebase'
 import { showToast } from '../../utils/toast'
 import { SignUpState } from './model'
 import { writeUserData } from '../../firebase'
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa6'
+import { Message } from '../../constants/messages'
 const SignUp = () => {
     const [isLoading, setIsLoading] = useState(false)
     const [showPassword, setShowPassword] = useState(false)
@@ -50,7 +51,7 @@ const SignUp = () => {
             } catch (error) {
                 console.log({ error })
             }
-            showToast('success', 'Success please verify your email to login')
+            showToast('success', Message.VERIFY_BEFORE_LOGIN)
             navigate('/login')
         }, 3000)
     }
@@ -58,7 +59,8 @@ const SignUp = () => {
         <div
             className="bg-blue-800 w-full h-screen items-center justify-center flex font-primary"
             style={{
-                backgroundImage: 'url(/src/assets/mountain.jpg)',
+                backgroundImage:
+                    'url(src/assets/background-image/mountain.jpg)',
                 backgroundSize: 'cover',
             }}
         >

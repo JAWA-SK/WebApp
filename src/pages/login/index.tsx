@@ -4,13 +4,14 @@ import { useForm } from 'react-hook-form'
 import { BiLoaderCircle } from 'react-icons/bi'
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa6'
 import { useNavigate } from 'react-router-dom'
-import lock from '../../assets/lock.json'
-import login_animation from '../../assets/login_animation.json'
+import lock from '../../assets/login-images/lock.json'
+import login_animation from '../../assets/login-images/login_animation.json'
 import { auth, forGotPassword } from '../../firebase'
 import { showToast } from '../../utils/toast'
 import { LoginState } from './model'
-import man_drinking_water from '/src/assets/man_drinking_water.png'
+import man_drinking_water from '../../assets/login-images/man_drinking_water.png'
 import { UserContext } from '../../context/UserContext'
+import { ErrorMessage, Message } from '../../constants/messages'
 
 const Login = () => {
     const [isLoading, setIsLoading] = useState(false)
@@ -51,13 +52,13 @@ const Login = () => {
             try {
                 await auth.signInWithEmailAndPassword(email, password)
                 isEmailVerified
-                    ? (showToast('success', 'Login Successful'),
+                    ? (showToast('success', Message.LOGIN_SUCCESSFUL),
                       navigate('/', { state: { user: data } }),
                       setIsLoggedIn(true))
-                    : showToast('info', 'Verify your email to continue')
+                    : showToast('info', Message.VERIFY_EMAIL)
             } catch (err) {
                 setAccess(false)
-                showToast('error', 'Incorrect email or password')
+                showToast('error', ErrorMessage.INCORRECT_MESSAGE)
                 console.log({ err })
             }
         }, 500)
@@ -68,7 +69,8 @@ const Login = () => {
             <div
                 className="bg-blue-800 w-full h-screen  items-center justify-center flex font-primary"
                 style={{
-                    backgroundImage: 'url(/src/assets/mountain.jpg)',
+                    backgroundImage:
+                        'url(src/assets/background-image/mountain.jpg)',
                     backgroundSize: 'cover',
                 }}
             >
@@ -165,14 +167,21 @@ const Login = () => {
                                 }
                                 <div className="flex gap-1 mt-1">
                                     <input
+                                        id="termsAndCondition"
                                         type="checkbox"
                                         className="accent-black"
                                         onClick={() => setTerm(!term)}
                                     ></input>
                                     <div className="flex justify-between cursor-pointer w-full">
-                                        <span className="text-sm cursor-pointer">
-                                            Accept terms and condition*
-                                        </span>
+                                        <label
+                                            className="text-sm cursor-pointer"
+                                            htmlFor="termsAndCondition"
+                                        >
+                                            Accept terms and condition
+                                            <span className="text-red-500">
+                                                *
+                                            </span>
+                                        </label>
                                         <span
                                             className="text-sm cursor-pointer hover:text-blue-700"
                                             onClick={() =>
