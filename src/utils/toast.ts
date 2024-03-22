@@ -9,7 +9,7 @@ const toastConfig: ToastContainerProps = {
     closeOnClick: true,
     pauseOnHover: true,
     draggable: true,
-    theme: 'light',
+    theme: 'colored',
 }
 
 export const showToast = (

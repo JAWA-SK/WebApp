@@ -7,8 +7,9 @@ import { SignUpState } from '../signup/model'
 import { FormComponent } from './form-component'
 import { NavBar } from './navbar'
 import { TextComponent } from './text-component'
-import { ErrorMessage } from '../../constants/messages'
+import { Message } from '../../constants/messages'
 import { showToast } from '../../utils/toast'
+import { Loader } from './loader'
 
 function Home() {
     const [userData, setUserData] = useState<SignUpState | null>(null)
@@ -29,16 +30,19 @@ function Home() {
                     userCred ? setIsLoggedIn(true) : setIsLoggedIn(false)
                 })
             } catch (error) {
-                showToast('error', ErrorMessage.FETCHING_DATA)
+                console.log({ error })
+                showToast('info', Message.GOT_AN_ACCOUNT)
             }
         }
         fetchData()
     })
-
+    if (!userDetail) {
+        return <Loader></Loader>
+    }
     return (
         <>
             <div
-                className="w-full flex flex-col h-screen font-primary p-3"
+                className="w-full flex flex-col h-screen font-primary p-3 "
                 style={{
                     backgroundImage:
                         'url(src/assets/background-image/mountain.jpg)',
@@ -55,7 +59,7 @@ function Home() {
                     </>
                 )}
                 <NavBar></NavBar>
-                <div className="flex h-full w-full">
+                <div className="flex h-full w-full ">
                     <TextComponent></TextComponent>
                     <FormComponent userDetail={userDetail}></FormComponent>
                 </div>

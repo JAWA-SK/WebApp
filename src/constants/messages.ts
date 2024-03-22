@@ -4,6 +4,7 @@ export const Message = {
     LOGIN_SUCCESSFUL: 'Login Successful',
     VERIFY_EMAIL: 'Verify your email to continue',
     VERIFY_BEFORE_LOGIN: 'Success please verify your email to login',
+    GOT_AN_ACCOUNT: 'It takes only a minute to signup',
 }
 
 export const ErrorMessage = {

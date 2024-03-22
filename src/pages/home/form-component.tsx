@@ -52,12 +52,12 @@ export const FormComponent = ({ userDetail }: UserStateProps) => {
                                 {...register('firstName', {
                                     required: {
                                         value: true,
-                                        message: 'Missing Last Name',
+                                        message: 'Missing First Name',
                                     },
                                     minLength: {
                                         value: 3,
                                         message:
-                                            'field must contain at least 1 characters',
+                                            'field must contain at least 3 characters',
                                     },
                                 })}
                             ></input>
@@ -135,7 +135,7 @@ export const FormComponent = ({ userDetail }: UserStateProps) => {
                                 {...register('phoneNo', {
                                     required: {
                                         value: true,
-                                        message: 'Missing phone number',
+                                        message: 'Missing Phone Number',
                                     },
                                     minLength: {
                                         value: 9,
@@ -162,7 +162,7 @@ export const FormComponent = ({ userDetail }: UserStateProps) => {
                                 {...register('email', {
                                     required: {
                                         value: true,
-                                        message: 'Missing email',
+                                        message: 'Missing Email',
                                     },
                                     pattern: {
                                         value: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i,

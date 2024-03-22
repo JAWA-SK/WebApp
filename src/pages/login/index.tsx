@@ -37,11 +37,14 @@ const Login = () => {
 
     useEffect(() => {
         setEmail(watch('email'))
-        auth.onAuthStateChanged((userCred) => {
-            setIsEmailVerified(userCred?.emailVerified)
-            console.log(userCred?.emailVerified)
-        })
-    }, [watch, setIsEmailVerified])
+    }, [watch])
+
+    // useEffect(() => {
+    //     auth.onAuthStateChanged((userCred) => {
+    //         setIsEmailVerified(userCred?.emailVerified)
+    //         console.log(userCred?.emailVerified)
+    //     })
+    // })
 
     const loginUser = async (data: LoginState) => {
         setIsLoading(true)
@@ -50,7 +53,13 @@ const Login = () => {
         setTimeout(async () => {
             setIsLoading(false)
             try {
-                await auth.signInWithEmailAndPassword(email, password)
+                const user = await auth.signInWithEmailAndPassword(
+                    email,
+                    password
+                )
+                if (user.user?.emailVerified) {
+                    setIsEmailVerified(true)
+                }
                 isEmailVerified
                     ? (showToast('success', Message.LOGIN_SUCCESSFUL),
                       navigate('/', { state: { user: data } }),
